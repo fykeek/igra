@@ -78,9 +78,36 @@ struct dom {
         txSetFillColor(RGB(252, 250, 158));
         txRectangle(x, y, x + w, y + h);
 
-        txSetColor(TX_BROWN);
-        txSetFillColor(TX_BROWN);
+        txSetColor(RGB(185, 122, 87));
+        txSetFillColor(RGB(185, 122, 87));
         txRectangle(xDoor, yDoor, xDoor + wDoor, yDoor + hDoor); //800, 500, 80, 100
+    }
+
+};
+
+struct Button {
+
+    int x;
+    int y;
+    int w;
+    int h;
+
+    const char* text;
+
+    COLORREF color_obv;
+    COLORREF color_zal;
+
+    int i;
+
+    void draw() {
+
+        txSetColor(color_obv);
+        txSetFillColor(color_zal);
+        txRectangle(x, y, x + w, y + h);
+        txSetColor(RGB(253, 251, 179));
+
+        if (i == 1) {txSelectFont("Comic Sans MS", 85);
+        txDrawText(x, y, x + w, y + h, text);}
     }
 
 };
@@ -91,120 +118,99 @@ int main()
 
     int i = 0;
 
+    string PAGE = "menu";
+
     GG kub = {100, 100, 15, 50, 50};
     dom House = {750, 300, 300, 300, 800, 490, 80, 110};
+    Button BmenuStart = {300, 300, 600, 100, "—“¿–“", TX_BLACK, TX_LIGHTCYAN, 1};
+    Button BmenuHelp = {300, 450, 600, 100, "Õ¿—“–Œ… »", TX_BLACK, TX_LIGHTCYAN, 1};
+    Button BmenuExit = {300, 600, 600, 100, "¬€’Œƒ", TX_BLACK, TX_LIGHTCYAN, 1};
 
-    while (i != 1) {
-
-        if (GetAsyncKeyState (VK_ESCAPE)) {i = 1;}
-
-        txSetFillColor(TX_GREY);
-        txClear();
-        txBegin();
-
-        House.draw();
-
-        kub.down();
-
-        if (GetAsyncKeyState('W')) {
-            kub.up();
-            kub.y -= kub.v;
-        }
-
-        else if (GetAsyncKeyState('A')) {
-            kub.left();
-            kub.x -= kub.v;
-        }
-
-        else if (GetAsyncKeyState('S')) {
-            kub.down();
-            kub.y += kub.v;
-        }
-
-        else if (GetAsyncKeyState('D')) {
-            kub.right();
-            kub.x += kub.v;
-        }
-
-
-
-        if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
-        kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {
-
-            break;
-
-        }
-
-
-        if (kub.y < 0) {
-            kub.y = 0;
-        }
-
-
-        if (kub.y > 800 - kub.h) {
-            kub.y = 800 - kub.h;
-        }
-
-        if (kub.x < 0) {
-            kub.x = 0;
-        }
-
-        if (kub.x + kub.w > 1200) {
-            kub.x = 1200 - kub.w;
-        }
-
-        txEnd();
-        txSleep(10);
-    }
-
-    while(i != 1) {
-
-        if (GetAsyncKeyState (VK_ESCAPE)) {i = 1;}
+    while (PAGE != "exit") {
 
         txSetFillColor(TX_GREY);
         txClear();
         txBegin();
 
-        kub.x =
+        if(PAGE == "menu") {
 
-        kub.down();
+            BmenuStart.draw();
+            BmenuHelp.draw();
+            BmenuExit.draw();
 
-        if (GetAsyncKeyState('W')) {
-            kub.up();
-            kub.y -= kub.v;
+
+            if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
+            txMouseX() < BmenuStart.x + BmenuStart.w && txMouseY() > BmenuStart.y
+            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = "game";}
+
+           if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
+            txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
+            && txMouseY() < BmenuHelp.y + BmenuHelp.h) {PAGE = "help";}
+
+            if(txMouseButtons() == 1 && txMouseX() > BmenuExit.x &&
+            txMouseX() < BmenuExit.x + BmenuExit.w && txMouseY() > BmenuExit.y
+            && txMouseY() < BmenuExit.y + BmenuExit.h) {PAGE = "exit";}
         }
 
-        else if (GetAsyncKeyState('A')) {
-            kub.left();
-            kub.x -= kub.v;
+        if (PAGE == "help") {
+
+            txSetColor(RGB(253, 251, 179));
+            txSelectFont("Comic Sans MS", 85);
+            txDrawText(0, -45 , 1200 - 45, 800, "Õ‡ÒÚÓÈÍË Ë„˚ Â˘∏ ÌÂ ‰Ó·‡‚ËÎË =(");
+            txDrawText(0, 45 , 1200 + 45, 800, "GitHab ‡‚ÚÓ‡: fykeek");
+
         }
 
-        else if (GetAsyncKeyState('S')) {
+        if(PAGE == "game") {
+
+            House.draw();
+
             kub.down();
-            kub.y += kub.v;
-        }
 
-        else if (GetAsyncKeyState('D')) {
-            kub.right();
-            kub.x += kub.v;
-        }
+            if (GetAsyncKeyState('W')) {
+                kub.up();
+                kub.y -= kub.v;
+            }
+
+            else if (GetAsyncKeyState('A')) {
+                kub.left();
+                kub.x -= kub.v;
+            }
+
+            else if (GetAsyncKeyState('S')) {
+                kub.down();
+                kub.y += kub.v;
+            }
+
+            else if (GetAsyncKeyState('D')) {
+                kub.right();
+                kub.x += kub.v;
+            }
+
+            if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
+            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {
+
+                break;
+
+            }
 
 
-        if (kub.y < 0) {
-            kub.y = 0;
-        }
+            if (kub.y < 0) {
+                kub.y = 0;
+            }
 
 
-        if (kub.y > 800 - kub.h) {
-            kub.y = 800 - kub.h;
-        }
+            if (kub.y > 800 - kub.h) {
+                kub.y = 800 - kub.h;
+            }
 
-        if (kub.x < 0) {
-            kub.x = 0;
-        }
+            if (kub.x < 0) {
+                kub.x = 0;
+            }
 
-        if (kub.x + kub.w > 1200) {
-            kub.x = 1200 - kub.w;
+            if (kub.x + kub.w > 1200) {
+                kub.x = 1200 - kub.w;
+            }
         }
 
         txEnd();
