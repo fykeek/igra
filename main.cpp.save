@@ -97,34 +97,98 @@ struct Button {
     COLORREF color_obv;
     COLORREF color_zal;
 
+    int obv;
+
     int i;
 
     void draw() {
 
-        txSetColor(color_obv);
+        txSetColor(color_obv, obv);
         txSetFillColor(color_zal);
         txRectangle(x, y, x + w, y + h);
-        txSetColor(RGB(253, 251, 179));
 
-        if (i == 1) {txSelectFont("Comic Sans MS", 85);
-        txDrawText(x, y, x + w, y + h, text);}
+        if (i == 1) {
+
+        txSetColor(RGB(253, 251, 179));
+        txSelectFont("Comic Sans MS", 85);
+        txDrawText(x, y, x + w, y + h, text);
+
+        }
+
+        if (i == 2) {
+
+            txSetColor(TX_WHITE);
+            txSetFillColor(TX_WHITE);
+            txRectangle(x + 8, y + 8, x + 51, y + 19);
+            txRectangle(x + 8, y + 24, x + 51, y + 35);
+            txRectangle(x + 8, y + 40, x + 51, y + 51);
+        }
     }
 
 };
 
-int main()
-    {
+dom House = {750, 300, 300, 300, 800, 490, 80, 110};
+
+GG kub = {100, 100, 15, 50, 50};
+
+int Frame_change = 0;
+
+i nt Phisik() {
+
+    if (GetAsyncKeyState('W')) {
+            kub.up();
+            kub.y -= kub.v;
+    }
+
+    else if (GetAsyncKeyState('A')) {
+        kub.left();
+        kub.x -= kub.v;
+    }
+
+    else if (GetAsyncKeyState('S')) {
+        kub.down();
+        kub.y += kub.v;
+    }
+
+    else if (GetAsyncKeyState('D')) {
+        kub.right();
+        kub.x += kub.v;
+    }
+
+
+    if (kub.y < 0) {
+        kub.y = 0;
+    }
+
+    if (kub.y > 800 - kub.h) {
+        kub.y = 800 - kub.h;
+    }
+
+    if (kub.x < 0) {
+        kub.x = 0;
+    }
+
+    if (kub.x + kub.w > 1200) {
+        kub.x = 1200 - kub.w;
+    }
+}
+
+int main() {
     txCreateWindow (1200, 800);
 
     int i = 0;
 
     string PAGE = "menu";
+    string SaveCadr = "G_Cadr1";
 
-    GG kub = {100, 100, 15, 50, 50};
-    dom House = {750, 300, 300, 300, 800, 490, 80, 110};
-    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, 1};
-    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 1};
-    Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 1};
+    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+
+    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 5, 2};
+
+    Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
 
     while (PAGE != "exit") {
 
@@ -141,7 +205,7 @@ int main()
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
             txMouseX() < BmenuStart.x + BmenuStart.w && txMouseY() > BmenuStart.y
-            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = "game";}
+            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = "G_Cadr1";}
 
            if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
             txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
@@ -153,64 +217,51 @@ int main()
         }
 
         if (PAGE == "help") {
-        
+
             txSetColor(RGB(253, 251, 179));
             txSelectFont("Comic Sans MS", 85);
-            txDrawText(0, -45 , 1200 - 45, 800, "Íàñòðîéêè èãðû åù¸ íå äîáàâèëè =(");
-            txDrawText(0, 45 , 1200 + 45, 800, "GitHab âà");
-        
+            txDrawText(0, -95 , 1200, 800 - 95, "Íàñòðîéêè èãðû åù¸ íå äîáàâèëè =(");
+            txDrawText(0, 0, 1200, 800, "GitHab àâòîðà: fykeek");
+
+            txSelectFont("Comic Sans MS", 45);
+            txSetColor(TX_WHITE);
+            txDrawText(0, 95, 1200, 895, "ESC - Âûéòè");
+
+            if  (GetAsyncKeyState(VK_ESCAPE)) {PAGE = "menu";}
         }
 
-        if(PAGE == "game") {
+        if (PAGE == "RMenu") {
+
+            BmenuResume.draw();
+            BmenuMenu.draw();
+
+            if (txMouseButtons() == 1 && txMouseX() > BmenuResume.x &&
+            txMouseX() < BmenuResume.x + BmenuResume.w && txMouseY() > BmenuResume.y
+            && txMouseY() < BmenuResume.y + BmenuResume.h) {PAGE = SaveCadr;}
+
+            if(txMouseButtons() == 1 && txMouseX() > BmenuMenu.x &&
+            txMouseX() < BmenuMenu.x + BmenuMenu.w && txMouseY() > BmenuMenu.y
+            && txMouseY() < BmenuMenu.y + BmenuMenu.h) {PAGE = "menu";}
+
+        }
+
+        if(PAGE == "G_Cadr1") {
 
             House.draw();
 
             kub.down();
 
-            if (GetAsyncKeyState('W')) {
-                kub.up();
-                kub.y -= kub.v;
-            }
+            BgameM.draw();
 
-            else if (GetAsyncKeyState('A')) {
-                kub.left();
-                kub.x -= kub.v;
-            }
+            if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
+            txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
+            && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
 
-            else if (GetAsyncKeyState('S')) {
-                kub.down();
-                kub.y += kub.v;
-            }
-
-            else if (GetAsyncKeyState('D')) {
-                kub.right();
-                kub.x += kub.v;
-            }
+            Phisik();
 
             if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
-            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {
+            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2";}
 
-                break;
-
-            }
-
-
-            if (kub.y < 0) {
-                kub.y = 0;
-            }
-
-
-            if (kub.y > 800 - kub.h) {
-                kub.y = 800 - kub.h;
-            }
-
-            if (kub.x < 0) {
-                kub.x = 0;
-            }
-
-            if (kub.x + kub.w > 1200) {
-                kub.x = 1200 - kub.w;
-            }
         }
 
         txEnd();
