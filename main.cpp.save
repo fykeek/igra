@@ -119,21 +119,41 @@ struct Button {
 
             txSetColor(TX_WHITE);
             txSetFillColor(TX_WHITE);
-            txRectangle(x + 8, y + 8, x + 51, y + 19);
-            txRectangle(x + 8, y + 24, x + 51, y + 35);
-            txRectangle(x + 8, y + 40, x + 51, y + 51);
+            txRectangle(x + 12, y + 12, x + 47, y + 19);
+            txRectangle(x + 12, y + 26, x + 47, y + 33);
+            txRectangle(x + 12, y + 40, x + 47, y + 47);
         }
     }
 
 };
 
+void Room(int n) {
+
+    txSetColor(RGB(185, 122, 87));
+    txSetFillColor(RGB(185, 122, 87));
+    txRectangle(596, 0, 604, 800);
+
+    txRectangle(210, 200, 390, 210);
+    
+    txSetColor(TX_BROWN);
+    txSetFillColor(TX_BROWN)
+    txRectangle(220, 210
+
+    if (n == 1) {
+
+        txSetColor(TX_BLACK);
+        txSetFillColor(TX_BLACK);
+        txRectangle(604, 0, 1200, 800);
+
+    }
+
+}
+
 dom House = {750, 300, 300, 300, 800, 490, 80, 110};
 
 GG kub = {100, 100, 15, 50, 50};
 
-int Frame_change = 0;
-
-i nt Phisik() {
+int Phisik() {
 
     if (GetAsyncKeyState('W')) {
             kub.up();
@@ -174,6 +194,7 @@ i nt Phisik() {
 }
 
 int main() {
+
     txCreateWindow (1200, 800);
 
     int i = 0;
@@ -185,7 +206,7 @@ int main() {
     Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
     Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
 
-    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 5, 2};
+    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2};
 
     Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
     Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
@@ -205,7 +226,7 @@ int main() {
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
             txMouseX() < BmenuStart.x + BmenuStart.w && txMouseY() > BmenuStart.y
-            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = "G_Cadr1";}
+            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = SaveCadr;}
 
            if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
             txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
@@ -260,7 +281,24 @@ int main() {
             Phisik();
 
             if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
-            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2";}
+            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON))
+            {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2"; kub.x = 200; kub.y = 800 - kub.h;}
+
+        }
+
+        if(PAGE == "G_Cadr2") {
+
+            kub.down();
+
+            Phisik();
+
+            BgameM.draw();
+
+            Room(1);
+
+            if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
+            txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
+            && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
 
         }
 

@@ -127,11 +127,29 @@ struct Button {
 
 };
 
+void Room(int n) {
+
+    txSetColor(RGB(185, 122, 87));
+    txSetFillColor(RGB(185, 122, 87));
+    txRectangle(596, 0, 604, 800);
+
+    txRectangle(210, 200, 390, 210);
+    txRectangle(225, 210, 232, 260);
+    txRectangle(375, 210, 367, 260);
+
+    if (n == 1) {
+
+        txSetColor(TX_BLACK);
+        txSetFillColor(TX_BLACK);
+        txRectangle(604, 0, 1200, 800);
+
+    }
+
+}
+
 dom House = {750, 300, 300, 300, 800, 490, 80, 110};
 
 GG kub = {100, 100, 15, 50, 50};
-
-int Frame_change = 0;
 
 int Phisik() {
 
@@ -174,6 +192,7 @@ int Phisik() {
 }
 
 int main() {
+
     txCreateWindow (1200, 800);
 
     int i = 0;
@@ -205,7 +224,7 @@ int main() {
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
             txMouseX() < BmenuStart.x + BmenuStart.w && txMouseY() > BmenuStart.y
-            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = "G_Cadr1";}
+            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = SaveCadr;}
 
            if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
             txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
@@ -260,7 +279,24 @@ int main() {
             Phisik();
 
             if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
-            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON)) {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2";}
+            kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON))
+            {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2"; kub.x = 200; kub.y = 800 - kub.h;}
+
+        }
+
+        if(PAGE == "G_Cadr2") {
+
+            kub.down();
+
+            Phisik();
+
+            BgameM.draw();
+
+            Room(1);
+
+            if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
+            txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
+            && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
 
         }
 
