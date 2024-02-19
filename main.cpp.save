@@ -134,10 +134,16 @@ void Room(int n) {
     txRectangle(596, 0, 604, 800);
 
     txRectangle(210, 200, 390, 210);
+    txRectangle(225, 210, 232, 260);
+    txRectangle(375, 210, 367, 260);
+
+    txSetColor(RGB(227, 220, 213));
+    txSetFillColor(RGB(227, 220, 213));
+    txRectangle(380 - 43, 200 - 73, 380, 200);
     
-    txSetColor(TX_BROWN);
-    txSetFillColor(TX_BROWN)
-    txRectangle(220, 210
+    txSetColor(RGB(0, 78, 155));
+    txSetFillColor(RGB(0, 78, 155));
+    txRectangle
 
     if (n == 1) {
 
