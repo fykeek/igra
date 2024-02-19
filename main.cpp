@@ -101,6 +101,8 @@ struct Button {
 
     int i;
 
+    int z;
+
     void draw() {
 
         txSetColor(color_obv, obv);
@@ -110,7 +112,7 @@ struct Button {
         if (i == 1) {
 
         txSetColor(RGB(253, 251, 179));
-        txSelectFont("Comic Sans MS", 85);
+        txSelectFont("Comic Sans MS", z);
         txDrawText(x, y, x + w, y + h, text);
 
         }
@@ -137,14 +139,6 @@ void Room(int n) {
     txRectangle(225, 210, 232, 260);
     txRectangle(375, 210, 367, 260);
 
-    txSetColor(RGB(227, 220, 213));
-    txSetFillColor(RGB(227, 220, 213));
-    txRectangle(337, 127, 380, 200);
-
-    txSetColor(RGB(0, 78, 155));
-    txSetFillColor(RGB(0, 78, 155));
-    txRectangle(342, 132, 349, 139);
-
     if (n == 1) {
 
         txSetColor(TX_BLACK);
@@ -152,6 +146,43 @@ void Room(int n) {
         txRectangle(604, 0, 1200, 800);
 
     }
+
+}
+
+void comp (int b) {
+
+    txSetColor(RGB(227, 220, 213));
+    txSetFillColor(RGB(227, 220, 213));
+    txRectangle(337, 127, 380, 200);
+
+    txSetColor(RGB(0, 78, 155));
+    txSetFillColor(RGB(0, 78, 155));
+    txRectangle(342, 132, 349, 139);
+    txRectangle(342, 144, 375, 151);
+    txRectangle(342, 158, 375, 195);
+
+    txSetColor(TX_DARKGREY);
+    txSetFillColor(TX_DARKGREY);
+
+    if (b == 1) {
+        txSetColor(TX_LIGHTGREEN);
+        txSetFillColor(TX_LIGHTGREEN);
+    }
+
+    txRectangle(354, 132, 361, 139);
+}
+
+void mon () {
+
+    txSetColor(TX_DARKGREY);
+    txSetFillColor(TX_DARKGREY);
+    txRectangle(242, 192, 307, 200);  //37 91    64
+    txRectangle(271, 192, 277, 180);
+    txRectangle(242, 127, 307, 180);
+
+    txSetColor(TX_BLACK);
+    txSetFillColor(TX_BLACK);
+    txRectangle(247, 132, 302, 175);
 
 }
 
@@ -205,17 +236,23 @@ int main() {
 
     int i = 0;
 
+    int ONk = 0;
+
     string PAGE = "menu";
     string SaveCadr = "G_Cadr1";
 
-    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
-    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
+    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
     Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
 
-    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2};
+    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2, 85};
 
-    Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
-    Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
+    Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
+
+    Button BOnKomp = {342, 132, 7, 7, "", RGB(0, 78, 155), RGB(0, 78, 155), 1, 1, 85};
+
+    Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 1, 1};
 
     while (PAGE != "exit") {
 
@@ -301,6 +338,14 @@ int main() {
             BgameM.draw();
 
             Room(1);
+
+            comp(ONk);
+
+            mon();
+
+            if(txMouseButtons() == 1 && txMouseX() > BOnKomp.x &&
+            txMouseX() < BOnKomp.x + BOnKomp.w && txMouseY() > BOnKomp.y
+            && txMouseY() < BOnKomp.y + BOnKomp.h) {ONk = 1;}
 
             if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
             txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
