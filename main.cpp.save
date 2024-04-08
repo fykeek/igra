@@ -76,11 +76,21 @@ struct dom {
     void draw () {
         txSetColor(RGB(252, 250, 158));
         txSetFillColor(RGB(252, 250, 158));
-        txRectangle(x, y, x + w, y + h);
+        txRectangle(x, y, );
 
         txSetColor(RGB(185, 122, 87));
         txSetFillColor(RGB(185, 122, 87));
         txRectangle(xDoor, yDoor, xDoor + wDoor, yDoor + hDoor); //800, 500, 80, 100
+
+        txSetColor(RGB(255, 0, 0));
+        txSetFillColor(RGB(255, 0, 0));
+        POINT kr[3] = {{x, y}, {x + (h/2), y - (w * 2/3)}, {x + h, y}};
+        txPolygon(kr, 3);
+        
+        txSetColor(RGB(0, 0, 255));
+        txSetFillColor(RGB(0, 0, 255));
+        txRectangle(xDoor + 40, yDoor, xDoor + 120, yDoor +):
+
     }
 
 };
@@ -100,7 +110,7 @@ struct Button {
     int obv;
 
     int i;
-    
+
     int z;
 
     void draw() {
@@ -243,14 +253,16 @@ int main() {
 
     Button BmenuStart = {300, 300, 600, 100, "ярюпр", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
     Button BmenuHelp = {300, 450, 600, 100, "мюярпнийх", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-    Button BmenuExit = {300, 600, 600, 100, "бшунд", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuExit = {300, 600, 600, 100, "бшунд", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
 
     Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2, 85};
 
     Button BmenuResume = {300, 275, 600, 100, "опнднкфхрэ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
     Button BmenuMenu = {300, 425 , 600, 100, "бширх", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
 
-    Button BOnKomp = {342, 132, 7, 7, "", TX_BLACK, RGB(0, 78, 155), 1, 1, 85};
+    Button BOnKomp = {342, 132, 7, 7, "", RGB(0, 78, 155), RGB(0, 78, 155), 1, 1, 85};
+
+
 
     while (PAGE != "exit") {
 

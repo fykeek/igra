@@ -81,6 +81,18 @@ struct dom {
         txSetColor(RGB(185, 122, 87));
         txSetFillColor(RGB(185, 122, 87));
         txRectangle(xDoor, yDoor, xDoor + wDoor, yDoor + hDoor); //800, 500, 80, 100
+
+        txSetColor(RGB(255, 0, 0));
+        txSetFillColor(RGB(255, 0, 0));
+        POINT kr[3] = {{x, y}, {x + (h/2), y - (w * 2/3)}, {x + h, y}};
+        txPolygon(kr, 3);
+
+        txSetColor(RGB(0, 0, 255));
+        txSetFillColor(RGB(0, 0, 255));
+        txRectangle(xDoor + 40 + wDoor, yDoor, xDoor + 120 + wDoor, yDoor + 80);
+        txRectangle(xDoor, yDoor - 120, xDoor + wDoor, yDoor - 40);
+        txRectangle(xDoor + 40 + wDoor, yDoor - 120, xDoor + 120 + wDoor, yDoor - 40);
+
     }
 
 };
@@ -138,6 +150,18 @@ void Room(int n) {
     txRectangle(210, 200, 390, 210);
     txRectangle(225, 210, 232, 260);
     txRectangle(375, 210, 367, 260);
+
+    txRectangle(1200 - 240, 260, 1200, 250);
+
+    txSetColor(TX_WHITE);
+    txSetFillColor(TX_WHITE);
+    txRectangle(1200 - 240, 0, 1200, 250);
+
+    txSetColor(RGB(253, 251, 179));
+    txSetFillColor(RGB(253, 251, 179));
+    txRectangle(1200 - 240 + 6, 6, 1200 - 240 + 117, 56);
+    txRectangle(1200 - 240 + 123, 6, 1200 - 240 + 234, 56);
+
 
     if (n == 1) {
 
@@ -243,7 +267,7 @@ int main() {
 
     Button BmenuStart = {300, 300, 600, 100, "ярюпр", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
     Button BmenuHelp = {300, 450, 600, 100, "мюярпнийх", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-    Button BmenuExit = {300, 600, 600, 100, "бшунд", TX_BLACK, TX_LIGHTCYAN, 5, 1};
+    Button BmenuExit = {300, 600, 600, 100, "бшунд", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
 
     Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2, 85};
 
@@ -252,7 +276,7 @@ int main() {
 
     Button BOnKomp = {342, 132, 7, 7, "", RGB(0, 78, 155), RGB(0, 78, 155), 1, 1, 85};
 
-    Button BmenuExit = {300, 600, 600, 100, "бшунд", TX_BLACK, TX_LIGHTCYAN, 1, 1};
+
 
     while (PAGE != "exit") {
 
@@ -337,7 +361,7 @@ int main() {
 
             BgameM.draw();
 
-            Room(1);
+            Room(0);
 
             comp(ONk);
 
