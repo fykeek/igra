@@ -198,16 +198,10 @@ struct pepad {
 
 };
 
-void Room(int n) {
+void bed() {
 
     txSetColor(RGB(185, 122, 87));
     txSetFillColor(RGB(185, 122, 87));
-    txRectangle(596, 0, 604, 800);
-
-    txRectangle(210, 200, 390, 210);
-    txRectangle(225, 210, 232, 260);
-    txRectangle(375, 210, 367, 260);
-
     txRectangle(1200 - 240, 260, 1200, 250);
 
     txSetColor(RGB(253, 251, 179));
@@ -218,6 +212,18 @@ void Room(int n) {
     txSetFillColor(TX_WHITE);
     txRectangle(1200 - 240 + 6, 6, 1200 - 240 + 117, 56);
     txRectangle(1200 - 240 + 123, 6, 1200 - 240 + 234, 56);
+
+    }
+
+void Room(int n) {
+
+    txSetColor(RGB(185, 122, 87));
+    txSetFillColor(RGB(185, 122, 87));
+    txRectangle(596, 0, 604, 800);
+
+    txRectangle(210, 200, 390, 210);
+    txRectangle(225, 210, 232, 260);
+    txRectangle(375, 210, 367, 260);
 
     if (n == 1) {
 
@@ -369,7 +375,7 @@ int main() {
     pepad prep[10];
 
     Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
-    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
+    Button BmenuHelp = {300, 450, 600, 100, "ÏÎÌÎÙÜ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
     Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
 
 
@@ -404,6 +410,9 @@ int main() {
             BmenuStart.draw();
             BmenuHelp.draw();
             BmenuExit.draw();
+            txSetColor(TX_WHITE);
+            txSelectFont("Comic Sans MS", 160);
+            txDrawText(0, 0, 1200, 300, "ÓÆÀÑÍÀß ÊÀÏ×À");
 
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
@@ -423,7 +432,7 @@ int main() {
 
             txSetColor(RGB(253, 251, 179));
             txSelectFont("Comic Sans MS", 85);
-            txDrawText(0, -95 , 1200, 800 - 95, "Íàñòðîéêè èãðû åù¸ íå äîáàâèëè =(");
+            txDrawText(0, -95 , 1200, 800 - 95, "Èñïîëüçóé WASD äëÿ óïðàâëåíèÿ!");
             txDrawText(0, 0, 1200, 800, "GitHab àâòîðà: fykeek");
 
             txSelectFont("Comic Sans MS", 45);
@@ -468,9 +477,9 @@ int main() {
 
             Rmenu();
 
-            Phisik();
-
             kub.down();
+
+            Phisik();
 
             Room(1);
 
@@ -523,7 +532,7 @@ int main() {
         }
 
         if(PAGE == "G_Cadr4"){
-ig();
+
             txSetColor(TX_BLACK);
             txSetFillColor(TX_BLACK);
             txRectangle(178 + 65, 56 + 65, 1023 - 65, 745 - 65);
@@ -542,15 +551,15 @@ ig();
 
                 }
 
-                if (Boat.x + Boat.w > prep[i].x && Boat.y > prep[i].y && Boat.y + Boat.h < prep[i].y + prep[i].h) {
+                if (txGetPixel (Boat.x + Boat.w, Boat.y) == RGB (255, 255, 0) || txGetPixel (Boat.x + Boat.w - Boat.h, Boat.y + Boat.h) == RGB (255, 255, 0) || (prep[i].y < Boat.y && prep[i].y  > Boat.y + Boat.h && prep[i].x < Boat.x + Boat.w - Boat.h)) {
 
-                    PAGE == "G_Cadr3+"; SaveCadr == "G_Cadr3+"; vrem = 0; txSetColor(TX_RED); txTextOut(100, 100, "00");
+                    PAGE = "G_Cadr3+"; SaveCadr = "G_Cadr3+"; vrem = 0; txSetColor(TX_RED); txTextOut(100, 100, "00"); prep[i].x = random(10, 100) + 800;
 
                 }
 
             }
 
-
+            ig();
 
             Rmenu();
 
@@ -580,9 +589,9 @@ ig();
 
             Rmenu();
 
-            Phisik();
-
             kub.down();
+
+            Phisik();
 
             Room(0);
 
