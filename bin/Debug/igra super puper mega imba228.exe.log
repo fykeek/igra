@@ -64,3 +64,315 @@ Run file:	C:\Users\user\Documents\igra super 228 imbulka\igra super puper mega i
 Directory:	C:\Users\user\Documents\igra super 228 imbulka\igra super puper mega imba228
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DF54 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0xBA8FE6BC в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x8C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DF54 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65 - prep[i].w), random(56 + 65, 745 - 65 - prep[i].h), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:12:55, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:13:01
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DF54 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0xBA8FE6BC в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x8C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DF54 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65 - prep[i].w), random(56 + 65, 745 - 65 - prep[i].h), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:12:55, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:13:02
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DF03 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0x007C0A70 в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x4640 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DF03 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65), random(56 + 65, 745 - 65), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:15:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:15:31
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DF03 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0x007C0A70 в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x4640 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DF03 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65), random(56 + 65, 745 - 65), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:15:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:15:31
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DEE7 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0x007C2444 в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x116C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DEE7 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (int i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65), random(56 + 65, 745 - 65), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:17:02, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:17:09
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042DEE7 в функции main() в файле D:/igra/igra-main/main.cpp на строке 348. Попытка записать данные по адресу 0x007C2444 в модуле D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x116C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DEE7 in D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe: main() at D:/igra/igra-main/main.cpp (348):
+
+    346:     for (int i = 1; i <= 10; i++) {
+    347: 
+=>  348:         prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65), random(56 + 65, 745 - 65), random(5, 10)}; // 958 243 715    | , , ,
+    349: 
+    350:     }
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in int main() at D:\igra\igra-main\main.cpp:320:
+
+    318: int main() {
+    319: 
+=>  320:     txCreateWindow (1200, 800);
+    321: 
+    322:     int i = 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2023-12-23 17:49:41 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	d:\download\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 11 2024 16:17:02, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 11 2024 16:17:09
+
+Run file:	D:\igra\igra-main\bin\Debug\igra super puper mega imba228.exe
+Directory:	D:\igra\igra-main
+
+--------------------------------------------------

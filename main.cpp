@@ -61,6 +61,45 @@ struct GG {
 
 };
 
+struct plot {
+
+    int x;
+    int y;
+    int w;
+    int h;
+    int v;
+
+    void draw() {
+
+        txSetColor(RGB(205, 135, 25));
+        txSetFillColor(RGB(205, 135, 25));
+        POINT kor[4] ={{x, y}, {x + w, y}, {x + w - h, y + h}, {x, y + h}};
+        txPolygon(kor, 4);
+
+        txSetColor(RGB(165, 107, 20));
+        txSetFillColor(RGB(165, 107, 20));
+        txRectangle(x + (w / 2) - 3, y, x + (w / 2) + 3, y - (h * 3/2));
+
+        txSetColor(TX_WHITE);
+        txSetFillColor(TX_WHITE);
+        POINT flag[3] = {{x + (w / 2) + 3, y - (h * 3/2)}, {x + (w / 2) + 3, y - (h * 3/4)}, {x + (w / 2) + 3 + h, y + (h/4)}};
+        txPolygon(flag, 3);
+    }
+
+    void ph() {
+
+            if (GetAsyncKeyState('W')) {
+
+                    y -= v;
+            }
+
+            else if (GetAsyncKeyState('S')) {
+
+                y += v;
+            }}
+
+};
+
 struct dom {
 
     int x;
@@ -92,7 +131,6 @@ struct dom {
         txRectangle(xDoor + 40 + wDoor, yDoor, xDoor + 120 + wDoor, yDoor + 80);
         txRectangle(xDoor, yDoor - 120, xDoor + wDoor, yDoor - 40);
         txRectangle(xDoor + 40 + wDoor, yDoor - 120, xDoor + 120 + wDoor, yDoor - 40);
-
     }
 
 };
@@ -108,6 +146,7 @@ struct Button {
 
     COLORREF color_obv;
     COLORREF color_zal;
+    COLORREF color_text;
 
     int obv;
 
@@ -123,7 +162,7 @@ struct Button {
 
         if (i == 1) {
 
-        txSetColor(RGB(253, 251, 179));
+        txSetColor(color_text);
         txSelectFont("Comic Sans MS", z);
         txDrawText(x, y, x + w, y + h, text);
 
@@ -141,6 +180,24 @@ struct Button {
 
 };
 
+struct pepad {
+
+    int w;
+    int h;
+    int x;
+    int y;
+    int v;
+
+    void draw() {
+
+        txSetColor(RGB (255, 255, 0));
+        txSetFillColor(RGB (255, 255, 0));
+        txRectangle(x, y, x + w, y + h);
+
+    }
+
+};
+
 void Room(int n) {
 
     txSetColor(RGB(185, 122, 87));
@@ -153,15 +210,14 @@ void Room(int n) {
 
     txRectangle(1200 - 240, 260, 1200, 250);
 
-    txSetColor(TX_WHITE);
-    txSetFillColor(TX_WHITE);
-    txRectangle(1200 - 240, 0, 1200, 250);
-
     txSetColor(RGB(253, 251, 179));
     txSetFillColor(RGB(253, 251, 179));
+    txRectangle(1200 - 240, 0, 1200, 250);
+
+    txSetColor(TX_WHITE);
+    txSetFillColor(TX_WHITE);
     txRectangle(1200 - 240 + 6, 6, 1200 - 240 + 117, 56);
     txRectangle(1200 - 240 + 123, 6, 1200 - 240 + 234, 56);
-
 
     if (n == 1) {
 
@@ -202,7 +258,7 @@ void mon () {
     txSetFillColor(TX_DARKGREY);
     txRectangle(242, 192, 307, 200);  //37 91    64
     txRectangle(271, 192, 277, 180);
-    txRectangle(242, 127, 307, 180);
+    txRectangle(242, 127, 307, 180); //65 53  | *13
 
     txSetColor(TX_BLACK);
     txSetFillColor(TX_BLACK);
@@ -210,8 +266,38 @@ void mon () {
 
 }
 
-dom House = {750, 300, 300, 300, 800, 490, 80, 110};
+void mon2 () {
 
+    txSetColor(TX_DARKGREY);
+    txSetFillColor(TX_DARKGREY);
+    txRectangle(178, 56, 1023, 745);//845 689
+    txRectangle(561, 745, 639, 801);
+
+    txSetColor(TX_LIGHTCYAN);
+    txSetFillColor(TX_LIGHTCYAN);
+    txRectangle(178 + 65, 56 + 65, 1023 - 65, 745 - 65);
+
+}
+
+void ig() {
+
+    txSetColor(TX_GREY);
+    txSetFillColor(TX_GREY);
+    txRectangle(0, 0, 1200, 56);
+    txRectangle(0, 0, 178, 800);
+    txRectangle(0, 800, 1200, 745);
+    txRectangle(1200, 0, 1023, 800);
+
+    txSetColor(TX_DARKGREY);
+    txSetFillColor(TX_DARKGREY);
+    txRectangle(178, 56, 1023, 56 + 65);
+    txRectangle(178, 56, 178 + 65, 745);
+    txRectangle(178, 745, 1023, 745 - 65);
+    txRectangle(1023, 56, 1023 - 65, 745);
+
+}
+
+dom House = {750, 300, 300, 300, 800, 490, 80, 110};
 GG kub = {100, 100, 15, 50, 50};
 
 int Phisik() {
@@ -254,6 +340,20 @@ int Phisik() {
     }
 }
 
+string PAGE = "menu";
+
+Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, RGB(253, 251, 179), 8, 2, 85};
+
+int Rmenu() {
+
+    BgameM.draw();
+
+    if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
+    txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
+    && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
+
+}
+
 int main() {
 
     txCreateWindow (1200, 800);
@@ -262,21 +362,36 @@ int main() {
 
     int ONk = 0;
 
-    string PAGE = "menu";
+    int vrem = 0;
+
     string SaveCadr = "G_Cadr1";
 
-    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-    Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
+    pepad prep[10];
 
-    Button BgameM = {20, 20, 59, 59, "", TX_WHITE, TX_BLUE, 8, 2, 85};
-
-    Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-    Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, 5, 1, 85};
-
-    Button BOnKomp = {342, 132, 7, 7, "", RGB(0, 78, 155), RGB(0, 78, 155), 1, 1, 85};
+    Button BmenuStart = {300, 300, 600, 100, "ÑÒÀÐÒ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
+    Button BmenuHelp = {300, 450, 600, 100, "ÍÀÑÒÐÎÉÊÈ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
+    Button BmenuExit = {300, 600, 600, 100, "ÂÛÕÎÄ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
 
 
+    Button BmenuResume = {300, 275, 600, 100, "ÏÐÎÄÎËÆÈÒÜ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
+    Button BmenuMenu = {300, 425 , 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 85};
+
+    Button BOnKomp = {342, 132, 7, 7, "", RGB(0, 78, 155), RGB(0, 78, 155), RGB(253, 251, 179), 1, 1, 85};
+
+    Button BMon = {247, 132, 55, 43, "ÆÌÈ ÆÌÈ!", TX_LIGHTCYAN, TX_LIGHTCYAN, TX_BLACK, 1, 1, 13};
+
+    Button BGame = {300, 450, 600, 100, "ÈÃÐÀÒÜ", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 85};
+    Button BGameE = {300, 450, 600, 100, "ÂÛÉÒÈ", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 85};
+
+    plot Boat = {178 + 165, 250, 150, 50, 5};
+
+    prep[0] = {90, 45, 908, 293, 7}; // 958 243 715
+
+    for (int i = 1; i <= 9; i++) {
+
+        prep[i] = {random(50, 100), random(10, 50), random(178 + 65,1023 - 65), random(56 + 65, 745 - 65), random(5, 10)}; // 958 243 715    | , , ,
+
+    }
 
     while (PAGE != "exit") {
 
@@ -339,11 +454,7 @@ int main() {
 
             kub.down();
 
-            BgameM.draw();
-
-            if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
-            txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
-            && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
+            Rmenu();
 
             Phisik();
 
@@ -355,25 +466,129 @@ int main() {
 
         if(PAGE == "G_Cadr2") {
 
-            kub.down();
+            Rmenu();
 
             Phisik();
 
-            BgameM.draw();
+            kub.down();
+
+            Room(1);
+
+            comp(ONk);
+
+            mon();
+
+            if(ONk == 1) {
+
+                BMon.draw();
+
+                if(txMouseButtons() == 1 && txMouseX() > BMon.x &&
+                txMouseX() < BMon.x + BMon.w && txMouseY() > BMon.y
+                && txMouseY() < BMon.y + BMon.h) {PAGE = "G_Cadr3"; SaveCadr = "G_Cadr3";}
+
+            }
+
+            if(txMouseButtons() == 1 && txMouseX() > BOnKomp.x &&
+            txMouseX() < BOnKomp.x + BOnKomp.w && txMouseY() > BOnKomp.y
+            && txMouseY() < BOnKomp.y + BOnKomp.h) {ONk = 1;}
+
+        }
+
+        if(PAGE == "G_Cadr3") {
+
+            Rmenu();
+
+            mon2();
+
+            BGame.draw();
+
+            if(txMouseButtons() == 1 && txMouseX() > BGame.x &&
+            txMouseX() < BGame.x + BGame.w && txMouseY() > BGame.y
+            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";}
+
+        }
+
+        if(PAGE == "G_Cadr3+") {
+
+            Rmenu();
+
+            mon2();
+
+            BGame.draw();
+
+            if(txMouseButtons() == 1 && txMouseX() > BGame.x &&
+            txMouseX() < BGame.x + BGame.w && txMouseY() > BGame.y
+            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";}
+
+        }
+
+        if(PAGE == "G_Cadr4"){
+ig();
+            txSetColor(TX_BLACK);
+            txSetFillColor(TX_BLACK);
+            txRectangle(178 + 65, 56 + 65, 1023 - 65, 745 - 65);
+
+             for (int i = 0; i <= 9; i++) {
+
+                prep[i].draw();
+
+                prep[i].x -= prep[i].v;
+
+                if (prep[i].x <= 0) {
+
+                    prep[i].x = 1200;
+                    prep[i].v += 0.5;
+                    prep[i].y += random(-200, 200);
+
+                }
+
+                if (Boat.x + Boat.w > prep[i].x && Boat.y > prep[i].y && Boat.y + Boat.h < prep[i].y + prep[i].h) {
+
+                    PAGE == "G_Cadr3+"; SaveCadr == "G_Cadr3+"; vrem = 0; txSetColor(TX_RED); txTextOut(100, 100, "00");
+
+                }
+
+            }
+
+
+
+            Rmenu();
+
+            Boat.draw();
+            Boat.ph();
+
+            vrem += 10;
+
+            if (vrem >= 18000) {PAGE = "G_Cadr5"; SaveCadr = "G_Cadr5";  vrem = 0;}
+
+        }
+
+        if(PAGE == "G_Cadr5"){
+
+            Rmenu();
+
+            mon2();
+
+            BGameE.draw();
+            if(txMouseButtons() == 1 && txMouseX() > BGameE.x &&
+            txMouseX() < BGameE.x + BGameE.w && txMouseY() > BGameE.y
+            && txMouseY() < BGameE.y + BGameE.h) {PAGE = "G_Cadr6"; SaveCadr = "G_Cadr6";}
+
+        }
+
+        if(PAGE == "G_Cadr6") {
+
+            Rmenu();
+
+            Phisik();
+
+            kub.down();
 
             Room(0);
 
             comp(ONk);
 
             mon();
-
-            if(txMouseButtons() == 1 && txMouseX() > BOnKomp.x &&
-            txMouseX() < BOnKomp.x + BOnKomp.w && txMouseY() > BOnKomp.y
-            && txMouseY() < BOnKomp.y + BOnKomp.h) {ONk = 1;}
-
-            if(txMouseButtons() == 1 && txMouseX() > BgameM.x &&
-            txMouseX() < BgameM.x + BgameM.w && txMouseY() > BgameM.y
-            && txMouseY() < BgameM.y + BgameM.h) {PAGE = "RMenu";}
 
         }
 
