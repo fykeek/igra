@@ -82,21 +82,37 @@ struct plot {
 
         txSetColor(TX_WHITE);
         txSetFillColor(TX_WHITE);
-        POINT flag[3] = {{x + (w / 2) + 3, y - (h * 3/2)}, {x + (w / 2) + 3, y - (h * 3/4)}, {x + (w / 2) + 3 + h, y + (h/4)}};
+        POINT flag[3] = {{x + (w / 2) + 3, y - (h * 3/2)}, {x + (w / 2) + 3, y - (h * 3/4)}, {x + (w / 2) + 3 + h, y - h}};
         txPolygon(flag, 3);
     }
 
     void ph() {
 
-            if (GetAsyncKeyState('W')) {
+        if (GetAsyncKeyState('W')) {
 
-                    y -= v;
-            }
+            y -= v;
+        }
 
-            else if (GetAsyncKeyState('S')) {
+        else if (GetAsyncKeyState('S')) {
 
-                y += v;
-            }}
+            y += v;
+        }
+
+        if (y <= 56 + 65 + (h * 3/2)) {                //178 + 65, 56 + 65, 1023 - 65, 745 - 65
+
+            y = 56 + 65 + (h * 3/2);
+
+        }
+
+        if (y >= 745 - 65 - h) {                //178 + 65, 56 + 65, 1023 - 65, 745 - 65
+
+            y = 745 - 65 - h;
+
+        }
+
+    }
+
+
 
 };
 
@@ -303,6 +319,34 @@ void ig() {
 
 }
 
+void dialog(const char* a) {
+
+    txSetColor(RGB(183, 129, 15), 5);
+    txSetFillColor(RGB(241, 185, 90));
+    txRectangle(800, 0, 1200, 300);
+    txSetColor(TX_WHITE);
+    txSelectFont("Comic Sans MS", 30);
+    txDrawText(800, 0, 1200, 300, a);
+
+}
+
+void chel() {
+
+    txSetColor(RGB(244, 203, 77));
+    txSetFillColor(RGB(244, 203, 77));
+    txRectangle(300, 100, 900, 700);
+
+    txSetColor(TX_WHITE);
+    txSetFillColor(TX_WHITE);
+    txRectangle(420, 220, 540, 340);
+    txRectangle(660, 220, 780, 340);
+
+    txSetColor(TX_BLACK);
+    txSetFillColor(TX_BLACK);
+    txRectangle(480, 280, 540, 340);
+    txRectangle(660, 280, 720, 340);
+}
+
 dom House = {750, 300, 300, 300, 800, 490, 80, 110};
 GG kub = {100, 100, 15, 50, 50};
 
@@ -386,8 +430,11 @@ int main() {
 
     Button BMon = {247, 132, 55, 43, "ЖМИ ЖМИ!", TX_LIGHTCYAN, TX_LIGHTCYAN, TX_BLACK, 1, 1, 13};
 
-    Button BGame = {300, 450, 600, 100, "ИГРАТЬ", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 85};
+    Button BGame = {300, 450, 600, 100, "НАЧАТЬ", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 85};
     Button BGameE = {300, 450, 600, 100, "ВЫЙТИ", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 85};
+    Button BGameO = {300, 450, 600, 100, "Оплатить счёт", TX_BLACK, TX_BLUE, TX_WHITE, 10, 1, 82};
+
+    Button BmenuExit2 = {880, 175, 240, 75, "ВЫЙТИ", TX_BLACK, TX_LIGHTCYAN, RGB(253, 251, 179), 5, 1, 52};
 
     plot Boat = {178 + 165, 250, 150, 50, 5};
 
@@ -401,11 +448,12 @@ int main() {
 
     while (PAGE != "exit") {
 
-        txSetFillColor(TX_GREY);
+        txSetFillColor(TX_GRAY);
         txClear();
         txBegin();
 
         if(PAGE == "menu") {
+
 
             BmenuStart.draw();
             BmenuHelp.draw();
@@ -417,15 +465,15 @@ int main() {
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuStart.x &&
             txMouseX() < BmenuStart.x + BmenuStart.w && txMouseY() > BmenuStart.y
-            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = SaveCadr;}
+            && txMouseY() < BmenuStart.y + BmenuStart.h) {PAGE = SaveCadr;while (txMouseButtons() == 1) {txSleep(10);}}
 
            if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
             txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
-            && txMouseY() < BmenuHelp.y + BmenuHelp.h) {PAGE = "help";}
+            && txMouseY() < BmenuHelp.y + BmenuHelp.h) {PAGE = "help";while (txMouseButtons() == 1) {txSleep(10);}}
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuExit.x &&
             txMouseX() < BmenuExit.x + BmenuExit.w && txMouseY() > BmenuExit.y
-            && txMouseY() < BmenuExit.y + BmenuExit.h) {PAGE = "exit";}
+            && txMouseY() < BmenuExit.y + BmenuExit.h) {PAGE = "exit";while (txMouseButtons() == 1) {txSleep(10);}}
         }
 
         if (PAGE == "help") {
@@ -439,6 +487,10 @@ int main() {
             txSetColor(TX_WHITE);
             txDrawText(0, 95, 1200, 895, "ESC - Выйти");
 
+            if(txMouseButtons() == 1 && txMouseX() > BmenuHelp.x &&
+            txMouseX() < BmenuHelp.x + BmenuHelp.w && txMouseY() > BmenuHelp.y
+            && txMouseY() < BmenuHelp.y + BmenuHelp.h) {PAGE = "G_Cadr6";while (txMouseButtons() == 1) {txSleep(10);}}
+
             if  (GetAsyncKeyState(VK_ESCAPE)) {PAGE = "menu";}
         }
 
@@ -449,15 +501,17 @@ int main() {
 
             if (txMouseButtons() == 1 && txMouseX() > BmenuResume.x &&
             txMouseX() < BmenuResume.x + BmenuResume.w && txMouseY() > BmenuResume.y
-            && txMouseY() < BmenuResume.y + BmenuResume.h) {PAGE = SaveCadr;}
+            && txMouseY() < BmenuResume.y + BmenuResume.h) {PAGE = SaveCadr;while (txMouseButtons() == 1) {txSleep(10);}}
 
             if(txMouseButtons() == 1 && txMouseX() > BmenuMenu.x &&
             txMouseX() < BmenuMenu.x + BmenuMenu.w && txMouseY() > BmenuMenu.y
-            && txMouseY() < BmenuMenu.y + BmenuMenu.h) {PAGE = "menu";}
+            && txMouseY() < BmenuMenu.y + BmenuMenu.h) {PAGE = "menu";while (txMouseButtons() == 1) {txSleep(10);}}
 
         }
 
         if(PAGE == "G_Cadr1") {
+
+            txSetFillColor(RGB(44, 216, 65));
 
             House.draw();
 
@@ -469,7 +523,10 @@ int main() {
 
             if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
             kub.y >= House.yDoor && kub.x >= House.xDoor && GetAsyncKeyState(VK_LBUTTON))
-            {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2"; kub.x = 200; kub.y = 800 - kub.h;}
+            {PAGE = "G_Cadr2"; SaveCadr = "G_Cadr2"; kub.x = 200; kub.y = 800 - kub.h;while (txMouseButtons() == 1) {txSleep(10);}}
+
+            if (kub.x + kub.w <= House.xDoor + House.wDoor && kub.y + kub.h <= House.yDoor + House.hDoor &&
+             kub.y >= House.yDoor && kub.x >= House.xDoor) {txSetColor(TX_WHITE); txSelectFont("Comic Sans MS", 30); txDrawText(750, 600, 1050, 650, "Нажмите ЛКМ");}
 
         }
 
@@ -487,19 +544,25 @@ int main() {
 
             mon();
 
+            if (vrem <= 1000)
+                dialog("Чёрт. Надо счёт за электричество \n"
+                       "заплатить. Пойду комп включу");
+
             if(ONk == 1) {
 
                 BMon.draw();
 
                 if(txMouseButtons() == 1 && txMouseX() > BMon.x &&
                 txMouseX() < BMon.x + BMon.w && txMouseY() > BMon.y
-                && txMouseY() < BMon.y + BMon.h) {PAGE = "G_Cadr3"; SaveCadr = "G_Cadr3";}
+                && txMouseY() < BMon.y + BMon.h) {PAGE = "G_Cadr3"; SaveCadr = "G_Cadr3"; vrem = 0;while (txMouseButtons() == 1) {txSleep(10);}}
 
             }
 
             if(txMouseButtons() == 1 && txMouseX() > BOnKomp.x &&
             txMouseX() < BOnKomp.x + BOnKomp.w && txMouseY() > BOnKomp.y
-            && txMouseY() < BOnKomp.y + BOnKomp.h) {ONk = 1;}
+            && txMouseY() < BOnKomp.y + BOnKomp.h) {ONk = 1;while (txMouseButtons() == 1) {txSleep(10);}}
+
+            vrem +=10;
 
         }
 
@@ -509,11 +572,22 @@ int main() {
 
             mon2();
 
+            txSetColor(TX_WHITE);
+
+            txSelectFont("Comic Sans MS", 100);
+
+            txDrawText(178 + 65, 56 + 65, 1023 - 65, 450, "Пройдите капчу");
+
             BGame.draw();
+
+            if (vrem <= 1000)
+                dialog("О нет опять эта ужасная капча!\n" "");
+
+            vrem += 10;
 
             if(txMouseButtons() == 1 && txMouseX() > BGame.x &&
             txMouseX() < BGame.x + BGame.w && txMouseY() > BGame.y
-            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";}
+            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";while (txMouseButtons() == 1) {txSleep(10);} vrem == 0;}
 
         }
 
@@ -523,15 +597,21 @@ int main() {
 
             mon2();
 
+            txSetColor(TX_WHITE);
+
+            txSelectFont("Comic Sans MS", 90);
+
+            txDrawText(178 + 65, 56 + 65, 1023 - 65, 450, "Попробуйте ещё раз");
+
             BGame.draw();
 
             if(txMouseButtons() == 1 && txMouseX() > BGame.x &&
             txMouseX() < BGame.x + BGame.w && txMouseY() > BGame.y
-            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";}
+            && txMouseY() < BGame.y + BGame.h) {PAGE = "G_Cadr4"; SaveCadr = "G_Cadr4";while (txMouseButtons() == 1) {txSleep(10);}}
 
         }
 
-        if(PAGE == "G_Cadr4"){
+            if(PAGE == "G_Cadr4"){
 
             txSetColor(TX_BLACK);
             txSetFillColor(TX_BLACK);
@@ -551,7 +631,8 @@ int main() {
 
                 }
 
-                if (txGetPixel (Boat.x + Boat.w, Boat.y) == RGB (255, 255, 0) || txGetPixel (Boat.x + Boat.w - Boat.h, Boat.y + Boat.h) == RGB (255, 255, 0) || (prep[i].y < Boat.y && prep[i].y  > Boat.y + Boat.h && prep[i].x < Boat.x + Boat.w - Boat.h)) {
+                if (txGetPixel (Boat.x + Boat.w, Boat.y) == RGB (255, 255, 0) || txGetPixel (Boat.x + Boat.w - Boat.h, Boat.y + Boat.h) == RGB (255, 255, 0) ||
+                (prep[i].y > Boat.y && prep[i].y  < Boat.y + Boat.h && prep[i].x < Boat.x + Boat.w - Boat.h  && prep[i].x > Boat.x)) {
 
                     PAGE = "G_Cadr3+"; SaveCadr = "G_Cadr3+"; vrem = 0; txSetColor(TX_RED); txTextOut(100, 100, "00"); prep[i].x = random(10, 100) + 800;
 
@@ -578,16 +659,45 @@ int main() {
 
             mon2();
 
+            txSetColor(TX_WHITE);
+
+            txSelectFont("Comic Sans MS", 70);
+
+            txDrawText(178 + 65, 56 + 65, 1023 - 65, 450, "Вы успешно прошли капчу");
+
+            BGameO.draw();
+
+            if(txMouseButtons() == 1 && txMouseX() > BGameO.x &&
+            txMouseX() < BGameO.x + BGameO.w && txMouseY() > BGameO.y
+            && txMouseY() < BGameO.y + BGameO.h) {PAGE = "G_Cadr5+"; SaveCadr = "G_Cadr5+"; while (txMouseButtons() == 1) {txSleep(10);}}
+
+        }
+
+        if(PAGE == "G_Cadr5+"){
+
+            Rmenu();
+
+            mon2();
+
+            txSetColor(TX_WHITE);
+
+            txSelectFont("Comic Sans MS", 65);
+
+            txDrawText(178 + 65, 56 + 65, 1023 - 65, 450, "Вы успешно оплатили счёт");
+
             BGameE.draw();
+
             if(txMouseButtons() == 1 && txMouseX() > BGameE.x &&
             txMouseX() < BGameE.x + BGameE.w && txMouseY() > BGameE.y
-            && txMouseY() < BGameE.y + BGameE.h) {PAGE = "G_Cadr6"; SaveCadr = "G_Cadr6";}
+            && txMouseY() < BGameE.y + BGameE.h) {PAGE = "G_Cadr6"; SaveCadr = "G_Cadr6";while (txMouseButtons() == 1) {txSleep(10);}}
 
         }
 
         if(PAGE == "G_Cadr6") {
 
             Rmenu();
+
+            bed();
 
             kub.down();
 
@@ -598,6 +708,36 @@ int main() {
             comp(ONk);
 
             mon();
+
+            if (vrem <= 1000)
+                dialog("О я так устал пойду посплю\n" "");
+
+            vrem += 10;
+
+            if (kub.x + kub.w <= 1200 && kub.y + kub.h <= 250 &&
+            kub.y >= 0 && kub.x >= 960 && GetAsyncKeyState(VK_LBUTTON))
+            {PAGE = "G_Cadr7"; SaveCadr = "G_Cadr7"; while (txMouseButtons() == 1) {txSleep(10);}}  //1200 - 240, 0, 1200, 250
+
+            if (kub.x + kub.w <= 1200 && kub.y + kub.h <= 250 &&
+            kub.y >= 0 && kub.x >= 960) {txSetColor(TX_WHITE); txSelectFont("Comic Sans MS", 30); txDrawText(960, 250, 1200, 300, "Нажмите ЛКМ");}
+
+        }
+
+        if(PAGE == "G_Cadr7") {
+
+            txSetColor(RGB(253, 251, 179));
+            txSetFillColor(RGB(253, 251, 179));
+            txRectangle(0,0,1200,800);
+
+            chel();
+
+            dialog("Спасибо игрок! Ты помог мне.\n""Может мы ещё встретимся. Прощай. И да я ломаю 4 стену.");
+
+            BmenuExit2.draw();
+
+            if(txMouseButtons() == 1 && txMouseX() > BmenuExit2.x &&
+            txMouseX() < BmenuExit2.x + BmenuExit2.w && txMouseY() > BmenuExit2.y
+            && txMouseY() < BmenuExit2.y + BmenuExit2.h) {PAGE = "exit";while (txMouseButtons() == 1) {txSleep(10);}}
 
         }
 
